@@ -5,7 +5,7 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 export default () => {
-    let store = new Vuex({
+    let store = new Vuex.Store({
         state: {
             info: ''
         },

@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import createRouter from './router'
+import createStore from './store'
 export default () => {
+	const router = createRouter()
+	const store = createStore()
 	const app = new Vue({
+		store,
 		router,
 		template: '<App />',
 		components: { App }

@@ -15,11 +15,16 @@ const renderer = createBundleRenderer(bundle, {
 // const createApp = require('./dist/server.bundle.js')['default']
 
 server.use("/" ,express.static(__dirname + '/dist'))
+
+server.get('/api/getInfo', (req, res) => {
+    res.send('SSR information!')
+})
+
 server.get("*", (req, res) => {
 	const context = {
 		title: 'ssr insert title!',
 		meta: `<meta charset="UTF-8">`,
-		url: req.url
+		url: req.url,
 	}
 	/* renderer.renderToString(context, (err, html) => {
 		if (err) {
@@ -28,6 +33,9 @@ server.get("*", (req, res) => {
 		res.end(html)
 	}) */
 	renderer.renderToString(context, (err, html) => {
+		if (err) {
+			res.status(500).end("server error!")
+		}
 		res.end(html)
 	})
 })
