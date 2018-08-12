@@ -27,7 +27,8 @@ export default {
         info () {
             return this.$store.getters.info
         }
-    }
+    },
+    title: 'home title'
 }
 </script>
 

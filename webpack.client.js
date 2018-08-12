@@ -33,7 +33,11 @@ var config = {
 		]
 	},
 	plugins: [
-		// 抽离manifest.js， 获得服务端渲染异步组件支持，否则renderer.renderToString()报错，卡了一天。。。
+		new webpack.DefinePlugin({
+			'process.env.VUE_ENV': '"client"' // 定义 runtime 环境变量，必须为字符串，一般使用JSON.stringify方法
+		}),
+		// 抽离manifest.js， 获得服务端渲染异步组件支持，否则renderer.renderToString()报错，（卡了一天。。。天坑。。。啊）
+		// 重要信息：这将 webpack 运行时分离到一个引导 chunk 中，以便可以在之后正确注入异步 chunk。
 		new webpack.optimize.CommonsChunkPlugin({
 			name: "manifest",
 			minChunks: Infinity

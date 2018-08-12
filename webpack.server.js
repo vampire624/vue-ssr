@@ -1,4 +1,5 @@
-var path = require('path')
+const path = require('path')
+const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
@@ -31,6 +32,9 @@ var config = {
 		]
 	},
 	plugins: [
+		new webpack.DefinePlugin({
+			'process.env.VUE_ENV': '"server"'// 定义 runtime 环境变量，必须为字符串，一般使用JSON.stringify方法
+		}),
 		new VueLoaderPlugin(),
 		new VueSSRServerPlugin()
 	],

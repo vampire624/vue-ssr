@@ -15,6 +15,9 @@ export default {
         return {
 
         }
+    },
+    title () {
+        return 'about title'
     }
 }
 </script>

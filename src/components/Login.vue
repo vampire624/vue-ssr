@@ -15,6 +15,9 @@ export default {
         return {
 
         }
+    },
+    title () {
+        return "login title"
     }
 }
 </script>

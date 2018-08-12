@@ -2,6 +2,7 @@ const express = require('express')
 const server = express()
 const fs = require('fs')
 const path = require('path')
+const LRU = require('lru-cache')
 const resolve = file => path.resolve(__dirname, file)
 const { createBundleRenderer } = require('vue-server-renderer')
 const bundle = require(resolve('./dist/vue-ssr-server-bundle.json'))
@@ -10,6 +11,10 @@ const template = fs.readFileSync(resolve('./index.template.html'), 'utf-8')
 const renderer = createBundleRenderer(bundle, {
 	template,
 	clientManifest,
+	cache: new LRU({ // 注册使用 lru 组件级别缓存
+		max: 100,
+		maxAge: 1000 * 60 * 10
+	}),
 	runInNewContext: false, 
 })
 // const createApp = require('./dist/server.bundle.js')['default']
@@ -22,7 +27,7 @@ server.get('/api/getInfo', (req, res) => {
 
 server.get("*", (req, res) => {
 	const context = {
-		title: 'ssr insert title!',
+		title: 'ssr default title!',
 		meta: `<meta charset="UTF-8">`,
 		url: req.url,
 	}
