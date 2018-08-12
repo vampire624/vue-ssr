@@ -8,8 +8,9 @@ export default () => {
 	const app = new Vue({
 		store,
 		router,
-		template: '<App />',
-		components: { App }
+		render: h => h(App) // 效果没差别，之前报错以为是高版本不支持
+		// template: '<App />',
+		// components: { App }
 	})
 	return app
 }

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Head></Head>
         <h1>this is Home component!</h1>
         <h1>
             {{ info }}
@@ -8,13 +9,18 @@
 </template>
 
 <script>
+import Head from './Head.vue'
 export default {
+    components: {
+        Head,
+    },
     data () {
         return {
 
         }
     },
     asyncData (store) {
+        console.log('dispatch getInfo')
         return store.dispatch('getInfo')
     },
     computed: {

@@ -34,6 +34,7 @@ server.get("*", (req, res) => {
 	}) */
 	renderer.renderToString(context, (err, html) => {
 		if (err) {
+			if (err.code === 404) res.status(404).end('not found!')
 			res.status(500).end("server error!")
 		}
 		res.end(html)
