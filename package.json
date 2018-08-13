@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "clean": "rimraf ./dist",
     "server": "webpack --config ./webpack.server.js",
     "client": "webpack --config ./webpack.client.js",
@@ -28,6 +29,7 @@
     "vue-loader": "^15.3.0",
     "vue-template-compiler": "^2.5.17",
     "webpack": "^3.5.5",
+    "webpack-merge": "^4.1.4",
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
